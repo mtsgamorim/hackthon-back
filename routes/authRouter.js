@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { signIn } from "../controllers/authController.js";
 import {
   validateSignIn,
   validateSignUp,
@@ -6,7 +7,7 @@ import {
 
 const authRouter = Router();
 
-authRouter.post("/sign-in", validateSignIn);
+authRouter.post("/sign-in", validateSignIn, signIn);
 
 authRouter.post("/sign-up", validateSignUp);
 

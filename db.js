@@ -8,7 +8,7 @@ let db;
 
 try {
   await mongoClient.connect();
-  db = mongoClient.db(process.env.DATABASE);
+  db = mongoClient.db(process.env.DATA_BASE);
   console.log("MongoDB conectado ao Banco de dados!");
 } catch (error) {
   console.log("Erro ao conectar ao banco de dados!", error);

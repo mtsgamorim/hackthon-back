@@ -28,6 +28,7 @@ export async function signIn(req, res) {
 
     res.send({
       token,
+      email: user.email,
       name: user.name,
     });
   } catch (error) {

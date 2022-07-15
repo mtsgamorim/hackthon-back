@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { signIn } from "../controllers/authController.js";
+import { signIn, signUp } from "../controllers/authController.js";
 import {
   validateSignIn,
   validateSignUp,
@@ -9,6 +9,6 @@ const authRouter = Router();
 
 authRouter.post("/sign-in", validateSignIn, signIn);
 
-authRouter.post("/sign-up", validateSignUp);
+authRouter.post("/sign-up", validateSignUp, signUp);
 
 export default authRouter;

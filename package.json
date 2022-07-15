@@ -4,7 +4,6 @@
   "description": "",
   "type": "module",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"

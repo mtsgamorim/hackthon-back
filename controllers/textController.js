@@ -27,3 +27,53 @@ export async function postText(req, res) {
     return;
   }
 }
+
+export async function updateText(req, res) {
+  const { user } = res.locals;
+  const { textId } = req.params;
+  const { title, email, text, date } = req.body;
+
+  try {
+    const textExists = await db
+      .collection("texts")
+      .findOne({ _id: new ObjectId(textId), email: user.email });
+
+    if (!textExists) {
+      res.sendStatus(404);
+      return;
+    }
+
+    await db
+      .collection("texts")
+      .updateOne(
+        { _id: new ObjectId(textId) },
+        { $set: { title, email, text, date } }
+      );
+
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+}
+
+export async function deleteText(req, res) {
+  const { user } = res.locals;
+  const { textId } = req.params;
+
+  try {
+    const text = await db
+      .collection("texts")
+      .findOne({ _id: new ObjectId(textId), email: user.email });
+
+    if (!text) {
+      res.sendStatus(404);
+      return;
+    }
+
+    await db.collection("texts").deleteOne({ _id: new ObjectId(text._id) });
+
+    res.sendStatus(204);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+}

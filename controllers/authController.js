@@ -40,6 +40,11 @@ export async function signUp(req, res) {
   const hashPassword = bcrypt.hashSync(password, 10);
 
   try {
+    const emailInUse = await db.collection("users").findOne({ email });
+    if (emailInUse) {
+      res.sendStatus(409);
+      return;
+    }
     await db.collection("users").insertOne({
       name,
       email,

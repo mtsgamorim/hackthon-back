@@ -23,11 +23,6 @@ textRouter.put(
   validateTextSchema,
   updateText
 );
-textRouter.delete(
-  "/texts/:textId",
-  validateTokenMiddleware,
-  validateTextSchema,
-  deleteText
-);
+textRouter.delete("/texts/:textId", validateTokenMiddleware, deleteText);
 
 export default textRouter;

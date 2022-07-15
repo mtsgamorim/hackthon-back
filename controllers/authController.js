@@ -35,3 +35,27 @@ export async function signIn(req, res) {
     res.sendStatus(500);
   }
 }
+
+export async function signUp(req, res) {
+  const { name, email, password } = req.body;
+  const hashPassword = bcrypt.hashSync(password, 10);
+
+  try {
+    const emailInUse = await db.collection("users").findOne({ email });
+    if (emailInUse) {
+      res.sendStatus(409);
+      return;
+    }
+    await db.collection("users").insertOne({
+      name,
+      email,
+      password: hashPassword,
+    });
+    res.sendStatus(201);
+    return;
+  } catch (error) {
+    console.log("Erro ao criar novo usuário!", error);
+    res.sendStatus(500);
+    return;
+  }
+}

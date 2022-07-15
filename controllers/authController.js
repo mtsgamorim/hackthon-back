@@ -3,7 +3,7 @@ import { ObjectId } from "mongodb";
 import { v4 as uuid } from "uuid";
 
 import db from "../db.js";
-import generateToken from "../utils/generateToken.js";
+import { generateToken } from "../utils/tokenUtils.js";
 
 export async function signIn(req, res) {
   const { email, password } = req.body;
